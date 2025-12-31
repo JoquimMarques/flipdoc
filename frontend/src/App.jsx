@@ -4,24 +4,58 @@ import ImageToPdf from './components/ImageToPdf'
 import WordToPdf from './components/WordToPdf'
 
 /**
- * FlipDoc - Aplicação principal
+ * FlipDoc - Main Application
  * 
- * Sistema de conversão de documentos para PDF
- * - Texto → PDF
- * - Imagem → PDF
+ * Document to PDF conversion system
+ * - Text → PDF
+ * - Image → PDF
  * - Word → PDF
  */
 
-// URL da API do backend
-// Em desenvolvimento: http://localhost:3000
-// Em produção: URL do Render (ex: https://flipdoc-backend.onrender.com)
+// Backend API URL
+// Development: http://localhost:3000
+// Production: Render URL (ex: https://flipdoc-backend.onrender.com)
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
+// SVG Icons
+const Icons = {
+    document: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14,2 14,8 20,8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+            <polyline points="10,9 9,9 8,9" />
+        </svg>
+    ),
+    text: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="4,7 4,4 20,4 20,7" />
+            <line x1="9" y1="20" x2="15" y2="20" />
+            <line x1="12" y1="4" x2="12" y2="20" />
+        </svg>
+    ),
+    image: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <polyline points="21,15 16,10 5,21" />
+        </svg>
+    ),
+    word: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14,2 14,8 20,8" />
+            <path d="M9 15l2 2 4-4" />
+        </svg>
+    )
+}
+
 function App() {
-    // Tab ativa (text, image, word)
+    // Active tab (text, image, word)
     const [activeTab, setActiveTab] = useState('text')
 
-    // Renderizar componente baseado na tab ativa
+    // Render component based on active tab
     const renderConverter = () => {
         switch (activeTab) {
             case 'text':
@@ -40,45 +74,47 @@ function App() {
             {/* Header */}
             <header className="header">
                 <div className="logo">
-                    <div className="logo-icon">📄</div>
+                    <div className="logo-icon">
+                        {Icons.document}
+                    </div>
                     <h1>FlipDoc</h1>
                 </div>
-                <p>Converta seus documentos para PDF de forma rápida e gratuita</p>
+                <p>Convert your documents to PDF quickly and for free</p>
             </header>
 
-            {/* Tabs de navegação */}
+            {/* Tab navigation */}
             <nav className="tabs">
                 <button
                     className={`tab ${activeTab === 'text' ? 'active' : ''}`}
                     onClick={() => setActiveTab('text')}
                 >
-                    <span className="tab-icon">📝</span>
-                    <span>Texto para PDF</span>
+                    <span className="tab-icon">{Icons.text}</span>
+                    <span>Text to PDF</span>
                 </button>
                 <button
                     className={`tab ${activeTab === 'image' ? 'active' : ''}`}
                     onClick={() => setActiveTab('image')}
                 >
-                    <span className="tab-icon">🖼️</span>
-                    <span>Imagem para PDF</span>
+                    <span className="tab-icon">{Icons.image}</span>
+                    <span>Image to PDF</span>
                 </button>
                 <button
                     className={`tab ${activeTab === 'word' ? 'active' : ''}`}
                     onClick={() => setActiveTab('word')}
                 >
-                    <span className="tab-icon">📄</span>
-                    <span>Word para PDF</span>
+                    <span className="tab-icon">{Icons.word}</span>
+                    <span>Word to PDF</span>
                 </button>
             </nav>
 
-            {/* Card de conversão */}
+            {/* Converter card */}
             {renderConverter()}
 
             {/* Footer */}
             <footer className="footer">
                 <p>
-                    Feito com ❤️ usando React + Node.js |
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer"> GitHub</a>
+                    Made with passion using React + Node.js |
+                    <a href="https://github.com/JoquimMarques/flipdoc" target="_blank" rel="noopener noreferrer"> GitHub</a>
                 </p>
             </footer>
         </div>
