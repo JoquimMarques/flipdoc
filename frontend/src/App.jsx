@@ -74,9 +74,7 @@ function App() {
             {/* Header */}
             <header className="header">
                 <div className="logo">
-                    <div className="logo-icon">
-                        {Icons.document}
-                    </div>
+                    <img src="/assets/logoflip.png" alt="FlipDoc Logo" className="logo-image" />
                     <h1>FlipDoc</h1>
                 </div>
                 <p>Convert your documents to PDF quickly and for free</p>
@@ -113,8 +111,8 @@ function App() {
             {/* Footer */}
             <footer className="footer">
                 <p>
-                    Made with passion using React + Node.js |
-                    <a href="https://github.com/JoquimMarques/flipdoc" target="_blank" rel="noopener noreferrer"> GitHub</a>
+                    &copy; {new Date().getFullYear()} FlipDoc. All rights reserved. 
+                    
                 </p>
             </footer>
         </div>
